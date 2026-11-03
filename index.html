@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caio Edgar Barbosa Ramos | Product Builder com IA</title>
+<meta name="description" content="Transformo processos manuais em ferramentas com IA. Portfólio de Caio Edgar Barbosa Ramos, Product Builder com IA.">
+<style>
+  :root{
+    --bg:#f4f5f7; --card:#ffffff; --text:#1c2128; --muted:#5b6470; --line:#e1e4e8;
+    --accent:#2f5bea; --accent-dark:#2447bf; --ok:#0f7b4f; --ok-bg:#e4f5ec;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  header{padding:56px 0 40px}
+  .eyebrow{color:var(--accent);font-weight:600;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase}
+  h1{margin:8px 0 12px;font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.15}
+  .lead{font-size:clamp(1.1rem,2.5vw,1.35rem);color:var(--muted);margin:0 0 28px;max-width:34em}
+  .btns{display:flex;flex-wrap:wrap;gap:10px}
+  .btn{display:inline-block;padding:11px 18px;border-radius:8px;border:1px solid var(--accent);
+    background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:.95rem}
+  .btn:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+  .btn.alt{background:transparent;color:var(--accent)}
+  .btn.alt:hover{background:#e9eefc}
+  section{padding:32px 0}
+  h2{font-size:1.5rem;margin:0 0 20px}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;
+    display:flex;flex-direction:column;gap:10px}
+  .card h3{margin:0;font-size:1.1rem}
+  .card p{margin:0;color:var(--muted);font-size:.95rem}
+  .tag{align-self:flex-start;font-size:.75rem;font-weight:600;padding:2px 9px;border-radius:99px;
+    background:#eceff3;color:var(--muted)}
+  .tag.live{background:var(--ok-bg);color:var(--ok)}
+  .result{margin-top:auto;padding:10px 12px;border-left:3px solid var(--accent);background:#eef2fd;
+    border-radius:0 8px 8px 0;font-size:.92rem;font-weight:600;color:var(--text)}
+  .card a.link{color:var(--accent);font-weight:600;font-size:.92rem;text-decoration:none}
+  .card a.link:hover{text-decoration:underline}
+  .how{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px}
+  .how p{margin:0;max-width:40em}
+  footer{padding:32px 0 56px;border-top:1px solid var(--line);margin-top:24px;color:var(--muted);font-size:.95rem}
+  footer a{color:var(--accent)}
+  @media (max-width:480px){header{padding:36px 0 24px}.btn{flex:1 1 100%;text-align:center}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Product Builder com IA</div>
+    <h1>Caio Edgar Barbosa Ramos</h1>
+    <p class="lead">Transformo processos manuais em ferramentas com IA.</p>
+    <div class="btns">
+      <a class="btn" href="https://www.linkedin.com/in/caioebramos/">LinkedIn</a>
+      <a class="btn alt" href="mailto:caioedgaramos11@gmail.com">E-mail</a>
+      <a class="btn alt" href="https://xbom-lanches.vercel.app" target="_blank" rel="noopener">Projeto no ar</a>
+    </div>
+  </header>
+
+  <section id="projetos">
+    <h2>Projetos</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Controle de Cartões</h3>
+        <p>Lê faturas de cada banco (Excel e PDF), projeta parcelas e gera indicadores. Roda dentro de um sistema corporativo criado pela TI.</p>
+        <div class="result">Resultado: substitui a análise manual das faturas.</div>
+      </article>
+
+      <article class="card">
+        <h3>Controle Nota PJ</h3>
+        <p>Automatiza a cobrança de notas fiscais de prestadores, do controle ao e-mail pronto.</p>
+        <div class="result">Resultado: de horas para cerca de 5 minutos. Adotado por outras áreas.</div>
+      </article>
+
+      <article class="card">
+        <span class="tag">Em desenvolvimento</span>
+        <h3>Contas a Receber</h3>
+        <p>Automatiza conciliação, confirmação de pagamento e cobrança por e-mail, com login por perfil. Iniciativa própria, construída com Claude Code.</p>
+      </article>
+
+      <article class="card">
+        <h3>Comparativo de fluxo de caixa</h3>
+        <p>Compara dois exports e mostra o que mudou entre datas.</p>
+        <div class="result">Resultado: resolveu uma análise que ninguém tinha automatizado.</div>
+      </article>
+
+      <article class="card">
+        <h3>Painéis em Power BI</h3>
+        <p>Painéis para gerência e diretoria, com atualização automática.</p>
+      </article>
+
+      <article class="card">
+        <span class="tag live">Em operação</span>
+        <h3>Sistema de pedidos para restaurante</h3>
+        <p>Cardápio digital, pizza meio a meio, taxa de entrega por bairro, Pix/cartão/dinheiro, acompanhamento em tempo real e painel administrativo. Next.js, Vercel e Claude Code.</p>
+        <a class="link" href="https://xbom-lanches.vercel.app" target="_blank" rel="noopener">Ver projeto no ar →</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="como-eu-trabalho">
+    <h2>Como eu trabalho</h2>
+    <div class="how">
+      <p>Uso IA todos os dias para construir, do primeiro rascunho ao sistema funcionando.</p>
+    </div>
+  </section>
+
+  <footer id="contato">
+    Contato: <a href="mailto:caioedgaramos11@gmail.com">caioedgaramos11@gmail.com</a>
+    · <a href="https://www.linkedin.com/in/caioebramos/">LinkedIn</a>
+  </footer>
+</div>
+</body>
+</html>
