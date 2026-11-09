@@ -1,116 +1,665 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Caio Edgar Barbosa Ramos | Product Builder com IA</title>
 <meta name="description" content="Transformo processos manuais em ferramentas com IA. Portfólio de Caio Edgar Barbosa Ramos, Product Builder com IA.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+
 <style>
-  :root{
-    --bg:#f4f5f7; --card:#ffffff; --text:#1c2128; --muted:#5b6470; --line:#e1e4e8;
-    --accent:#2f5bea; --accent-dark:#2447bf; --ok:#0f7b4f; --ok-bg:#e4f5ec;
-  }
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{margin:0;background:var(--bg);color:var(--text);
-    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
-  header{padding:56px 0 40px}
-  .eyebrow{color:var(--accent);font-weight:600;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase}
-  h1{margin:8px 0 12px;font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.15}
-  .lead{font-size:clamp(1.1rem,2.5vw,1.35rem);color:var(--muted);margin:0 0 28px;max-width:34em}
-  .btns{display:flex;flex-wrap:wrap;gap:10px}
-  .btn{display:inline-block;padding:11px 18px;border-radius:8px;border:1px solid var(--accent);
-    background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:.95rem}
-  .btn:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
-  .btn.alt{background:transparent;color:var(--accent)}
-  .btn.alt:hover{background:#e9eefc}
-  section{padding:32px 0}
-  h2{font-size:1.5rem;margin:0 0 20px}
-  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;
-    display:flex;flex-direction:column;gap:10px}
-  .card h3{margin:0;font-size:1.1rem}
-  .card p{margin:0;color:var(--muted);font-size:.95rem}
-  .tag{align-self:flex-start;font-size:.75rem;font-weight:600;padding:2px 9px;border-radius:99px;
-    background:#eceff3;color:var(--muted)}
-  .tag.live{background:var(--ok-bg);color:var(--ok)}
-  .result{margin-top:auto;padding:10px 12px;border-left:3px solid var(--accent);background:#eef2fd;
-    border-radius:0 8px 8px 0;font-size:.92rem;font-weight:600;color:var(--text)}
-  .card a.link{color:var(--accent);font-weight:600;font-size:.92rem;text-decoration:none}
-  .card a.link:hover{text-decoration:underline}
-  .how{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px}
-  .how p{margin:0;max-width:40em}
-  footer{padding:32px 0 56px;border-top:1px solid var(--line);margin-top:24px;color:var(--muted);font-size:.95rem}
-  footer a{color:var(--accent)}
-  @media (max-width:480px){header{padding:36px 0 24px}.btn{flex:1 1 100%;text-align:center}}
+:root {
+  /* Light theme (default) */
+  --bg: #f8f9fb;
+  --bg-elevated: #ffffff;
+  --bg-hover: #eef1f5;
+  --text: #1a1d23;
+  --text-muted: #5a6270;
+  --text-faint: #9aa3af;
+  --border: #e4e7ed;
+  --border-strong: #d0d5dd;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-light: #dbeafe;
+  --accent-glow: rgba(37, 99, 235, 0.15);
+  --success: #059669;
+  --success-bg: #d1fae5;
+  --warning: #d97706;
+  --warning-bg: #fef3c7;
+  --card-shadow: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+  --card-shadow-hover: 0 12px 24px rgba(16, 24, 40, 0.1), 0 4px 8px rgba(16, 24, 40, 0.06);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --transition: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --font-sans: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --max-width: 1040px;
+  --header-h: auto;
+}
+
+[data-theme="dark"] {
+  --bg: #0f1115;
+  --bg-elevated: #171a1f;
+  --bg-hover: #1e2229;
+  --text: #f1f3f5;
+  --text-muted: #98a2b3;
+  --text-faint: #6b7280;
+  --border: #2a2f3a;
+  --border-strong: #374151;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-light: #1e3a5f;
+  --accent-glow: rgba(59, 130, 246, 0.2);
+  --success: #34d399;
+  --success-bg: #064e3b;
+  --warning: #fbbf24;
+  --warning-bg: #78350f;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --card-shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 var(--font-sans);
+  transition: background var(--transition-slow), color var(--transition-slow);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Focus visible */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+/* Selection */
+::selection { background: var(--accent-light); color: var(--accent); }
+
+/* ===== HEADER / HERO ===== */
+header { position: relative; padding: 72px 0 56px; overflow: hidden; }
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%, var(--accent-glow) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, var(--accent-glow) 0%, transparent 50%);
+  pointer-events: none;
+  opacity: 0.6;
+}
+[data-theme="dark"] header::before { opacity: 0.35; }
+
+.header-inner { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 28px; align-items: flex-start; }
+
+/* Top bar with theme toggle */
+.header-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--accent); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+  background: var(--accent-light); padding: 6px 12px; border-radius: 999px;
+  border: 1px solid var(--border);
+  transition: all var(--transition);
+}
+.eyebrow:hover { background: var(--accent); color: white; border-color: var(--accent); }
+.eyebrow svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+.theme-toggle {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  color: var(--text); cursor: pointer;
+  transition: all var(--transition);
+}
+.theme-toggle:hover { background: var(--bg-hover); border-color: var(--border-strong); transform: scale(1.04); }
+.theme-toggle:active { transform: scale(0.98); }
+.theme-toggle svg { width: 20px; height: 20px; transition: transform var(--transition), opacity var(--transition); }
+.theme-toggle .sun { display: block; }
+.theme-toggle .moon { display: none; }
+[data-theme="dark"] .theme-toggle .sun { display: none; }
+[data-theme="dark"] .theme-toggle .moon { display: block; }
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, var(--text) 0%, var(--text-muted) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.lead {
+  margin: 0; max-width: 42ch;
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  color: var(--text-muted);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 24px; border-radius: 10px; border: 1px solid transparent;
+  background: var(--accent); color: #fff; text-decoration: none;
+  font-weight: 600; font-size: 0.92rem; line-height: 1;
+  cursor: pointer; transition: all var(--transition);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+.btn:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35); }
+.btn:active { transform: translateY(0); }
+.btn.alt {
+  background: transparent; color: var(--accent); border-color: var(--accent);
+  box-shadow: none;
+}
+.btn.alt:hover { background: var(--accent-light); color: var(--accent-hover); }
+.btn.ghost {
+  background: transparent; color: var(--text-muted); border-color: var(--border);
+}
+.btn.ghost:hover { background: var(--bg-hover); color: var(--text); border-color: var(--border-strong); }
+.btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* Floating orbs for depth */
+.hero-orbs { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.orb {
+  position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.4;
+  animation: float 18s ease-in-out infinite;
+}
+.orb-1 { width: 320px; height: 320px; background: var(--accent); top: -100px; left: -100px; animation-delay: 0s; }
+.orb-2 { width: 240px; height: 240px; background: var(--success); bottom: -60px; right: -80px; animation-delay: -6s; }
+.orb-3 { width: 180px; height: 180px; background: var(--warning); top: 40%; left: 50%; animation-delay: -12s; }
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -20px) scale(1.05); }
+  50% { transform: translate(-20px, 30px) scale(0.95); }
+  75% { transform: translate(15px, 25px) scale(1.02); }
+}
+
+/* ===== SECTIONS ===== */
+section { padding: 56px 0; }
+.section-header { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+.section-header h2 {
+  margin: 0; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em;
+}
+.section-header p { margin: 0; color: var(--text-muted); font-size: 1rem; max-width: 50ch; }
+
+/* ===== PROJECTS GRID ===== */
+#projetos { padding-top: 40px; }
+.grid {
+  display: grid; gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+.card {
+  position: relative;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex; flex-direction: column;
+  box-shadow: var(--card-shadow);
+  transition: all var(--transition-slow);
+  opacity: 0; transform: translateY(24px);
+}
+.card.visible { opacity: 1; transform: translateY(0); }
+.card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-4px);
+}
+.card:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+
+.card-header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.card h3 { margin: 0; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+.card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; flex: 1; }
+
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+  flex-shrink: 0;
+}
+.tag.dev { background: var(--warning-bg); color: var(--warning); border: 1px solid var(--warning-bg); }
+.tag.live { background: var(--success-bg); color: var(--success); border: 1px solid var(--success-bg); }
+.tag.private { background: var(--accent-light); color: var(--accent); border: 1px solid var(--accent-light); }
+
+.card-thumb {
+  width: 100%; aspect-ratio: 16/10; border-radius: 10px;
+  background: linear-gradient(135deg, var(--border) 0%, var(--bg-hover) 100%);
+  margin: 16px 0 12px; overflow: hidden; position: relative;
+  border: 1px solid var(--border);
+}
+.card-thumb img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  transition: transform var(--transition-slow);
+  opacity: 0;
+}
+.card-thumb img.loaded { opacity: 1; }
+.card:hover .card-thumb img.loaded { transform: scale(1.03); }
+.card-thumb .thumb-placeholder {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  color: var(--text-faint); font-size: 0.8rem; font-weight: 500;
+  background: linear-gradient(135deg, var(--border) 0%, var(--bg-hover) 100%);
+  transition: opacity var(--transition);
+}
+.card-thumb img.loaded + .thumb-placeholder { opacity: 0; pointer-events: none; }
+
+.card-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); }
+.result {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.85rem; font-weight: 600; color: var(--success);
+  background: var(--success-bg); padding: 6px 12px; border-radius: 999px;
+}
+.result::before { content: ""; width: 6px; height: 6px; background: var(--success); border-radius: 50%; flex-shrink: 0; }
+.card a.link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent); font-weight: 600; font-size: 0.88rem; text-decoration: none;
+  padding: 6px 0; transition: all var(--transition);
+}
+.card a.link:hover { gap: 10px; }
+.card a.link svg { width: 16px; height: 16px; transition: transform var(--transition); }
+.card a.link:hover svg { transform: translateX(2px); }
+
+/* ===== HOW I WORK ===== */
+#como-eu-trabalho { background: var(--bg-elevated); margin: 0 -24px; padding: 64px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+#como-eu-trabalho .wrap { max-width: 800px; }
+.how-content { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.how-item { padding: 24px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); transition: all var(--transition); opacity: 0; transform: translateY(20px); }
+.how-item.visible { opacity: 1; transform: translateY(0); }
+.how-item:hover { border-color: var(--border-strong); box-shadow: var(--card-shadow-hover); }
+.how-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; transition: all var(--transition); }
+.how-item:hover .how-icon { background: var(--accent); color: white; transform: scale(1.05) rotate(2deg); }
+.how-icon svg { width: 22px; height: 22px; }
+.how-item h3 { margin: 0 0 8px; font-size: 1.05rem; font-weight: 600; }
+.how-item p { margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; }
+
+/* ===== FOOTER ===== */
+footer { padding: 48px 0 64px; color: var(--text-muted); font-size: 0.92rem; text-align: center; }
+footer a { color: var(--accent); text-decoration: none; font-weight: 500; transition: color var(--transition); }
+footer a:hover { color: var(--accent-hover); text-decoration: underline; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 24px; margin-bottom: 16px; }
+.copyright { color: var(--text-faint); font-size: 0.8rem; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-in { animation: fadeUp 0.6s var(--transition) forwards; }
+.animate-in-delay-1 { animation-delay: 80ms; }
+.animate-in-delay-2 { animation-delay: 160ms; }
+.animate-in-delay-3 { animation-delay: 240ms; }
+.animate-in-delay-4 { animation-delay: 320ms; }
+.animate-in-delay-5 { animation-delay: 400ms; }
+.animate-in-delay-6 { animation-delay: 480ms; }
+
+/* Stagger for grid children */
+.grid > * { opacity: 0; }
+.grid > *.visible { animation: fadeUp 0.5s var(--transition) forwards; }
+.grid > *:nth-child(1).visible { animation-delay: 60ms; }
+.grid > *:nth-child(2).visible { animation-delay: 120ms; }
+.grid > *:nth-child(3).visible { animation-delay: 180ms; }
+.grid > *:nth-child(4).visible { animation-delay: 240ms; }
+.grid > *:nth-child(5).visible { animation-delay: 300ms; }
+.grid > *:nth-child(6).visible { animation-delay: 360ms; }
+.grid > *:nth-child(7).visible { animation-delay: 420ms; }
+.grid > *:nth-child(8).visible { animation-delay: 480ms; }
+
+.how-item { opacity: 0; }
+.how-item.visible { animation: fadeUp 0.5s var(--transition) forwards; }
+.how-item:nth-child(1).visible { animation-delay: 100ms; }
+.how-item:nth-child(2).visible { animation-delay: 200ms; }
+.how-item:nth-child(3).visible { animation-delay: 300ms; }
+.how-item:nth-child(4).visible { animation-delay: 400ms; }
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  .animate-in, .grid > *.visible, .how-item.visible,
+  .card, .how-item { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .orb { animation: none !important; }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 480px) {
+  header { padding: 48px 0 36px; }
+  .header-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .btn { flex: 1 1 100%; }
+  .wrap { padding: 0 16px; }
+  section { padding: 40px 0; }
+  #como-eu-trabalho { margin: 0 -16px; padding: 48px 16px; }
+  .card { padding: 20px; }
+  .card-thumb { aspect-ratio: 4/3; }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <!-- ===== HEADER ===== -->
   <header>
-    <div class="eyebrow">Product Builder com IA</div>
-    <h1>Caio Edgar Barbosa Ramos</h1>
-    <p class="lead">Transformo processos manuais em ferramentas com IA.</p>
-    <div class="btns">
-      <a class="btn" href="https://www.linkedin.com/in/caioebramos/">LinkedIn</a>
-      <a class="btn alt" href="mailto:caioedgaramos11@gmail.com">E-mail</a>
-      <a class="btn alt" href="https://xbom-lanches.vercel.app" target="_blank" rel="noopener">Projeto no ar</a>
+    <div class="hero-orbs" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="header-inner">
+      <div class="header-top">
+        <span class="eyebrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Product Builder com IA
+        </span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" type="button">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+      <h1 class="animate-in">Caio Edgar Barbosa Ramos</h1>
+      <p class="lead animate-in animate-in-delay-1">Transformo processos manuais em ferramentas com IA.</p>
+      <div class="btns animate-in animate-in-delay-2">
+        <a class="btn" href="https://www.linkedin.com/in/caioebramos/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn alt" href="mailto:caioedgaramos11@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          E-mail
+        </a>
+        <a class="btn alt" href="https://xbom-lanches.vercel.app" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Projeto no ar
+        </a>
+      </div>
     </div>
   </header>
 
+  <!-- ===== PROJETOS ===== -->
   <section id="projetos">
-    <h2>Projetos</h2>
-    <div class="grid">
-      <article class="card">
-        <h3>Controle de Cartões</h3>
-        <p>Lê faturas de cada banco (Excel e PDF), projeta parcelas e gera indicadores. Roda dentro de um sistema corporativo criado pela TI.</p>
-        <div class="result">Resultado: substitui a análise manual das faturas.</div>
-      </article>
-
-      <article class="card">
-        <h3>Controle Nota PJ</h3>
-        <p>Automatiza a cobrança de notas fiscais de prestadores, do controle ao e-mail pronto.</p>
-        <div class="result">Resultado: de horas para cerca de 5 minutos. Adotado por outras áreas.</div>
-      </article>
-
-      <article class="card">
-        <span class="tag">Em desenvolvimento</span>
-        <h3>Contas a Receber</h3>
-        <p>Automatiza conciliação, confirmação de pagamento e cobrança por e-mail, com login por perfil. Iniciativa própria, construída com Claude Code.</p>
-      </article>
-
-      <article class="card">
-        <h3>Comparativo de fluxo de caixa</h3>
-        <p>Compara dois exports e mostra o que mudou entre datas.</p>
-        <div class="result">Resultado: resolveu uma análise que ninguém tinha automatizado.</div>
-      </article>
-
-      <article class="card">
-        <h3>Painéis em Power BI</h3>
-        <p>Painéis para gerência e diretoria, com atualização automática.</p>
-      </article>
-
-      <article class="card">
-        <span class="tag live">No ar, em fase de implantação</span>
-        <h3>Sistema de pedidos para restaurante</h3>
-        <p>Cardápio digital, pizza meio a meio, taxa de entrega por bairro, Pix/cartão/dinheiro, acompanhamento em tempo real e painel administrativo. Next.js, Vercel e Claude Code.</p>
-        <a class="link" href="https://xbom-lanches.vercel.app" target="_blank" rel="noopener">Ver projeto no ar →</a>
-      </article>
+    <div class="section-header">
+      <h2 class="animate-in">Projetos</h2>
+      <p class="animate-in animate-in-delay-1">Soluções reais que reduzem horas de trabalho manual para minutos, usando IA no dia a dia.</p>
+    </div>
+    <div class="grid" id="projectsGrid">
+      <!-- Cards injected by JS -->
     </div>
   </section>
 
+  <!-- ===== COMO EU TRABALHO ===== -->
   <section id="como-eu-trabalho">
-    <h2>Como eu trabalho</h2>
-    <div class="how">
-      <p>Uso IA todos os dias para construir, do primeiro rascunho ao sistema funcionando.</p>
+    <div class="wrap">
+      <div class="section-header">
+        <h2 class="animate-in">Como eu trabalho</h2>
+        <p class="animate-in animate-in-delay-1">IA não é buzzword — é a ferramenta que uso do primeiro rascunho ao sistema em produção.</p>
+      </div>
+      <div class="how-content" id="howGrid">
+        <!-- Items injected by JS -->
+      </div>
     </div>
   </section>
 
+  <!-- ===== FOOTER ===== -->
   <footer id="contato">
-    Contato: <a href="mailto:caioedgaramos11@gmail.com">caioedgaramos11@gmail.com</a>
-    · <a href="https://www.linkedin.com/in/caioebramos/">LinkedIn</a>
+    <div class="footer-links">
+      <a href="mailto:caioedgaramos11@gmail.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;margin-right:6px"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+        caioedgaramos11@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/caioebramos/" target="_blank" rel="noopener noreferrer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align:middle;margin-right:6px"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://xbom-lanches.vercel.app" target="_blank" rel="noopener noreferrer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;margin-right:6px"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        Xbom Lanches
+      </a>
+    </div>
+    <p class="copyright">Feito com HTML, CSS e IA — 2025</p>
   </footer>
 </div>
+
+<script>
+// ===== DATA =====
+const projects = [
+  {
+    title: "Controle de Cartões",
+    desc: "Lê faturas de cada banco (Excel e PDF), projeta parcelas e gera indicadores. Roda dentro de um sistema corporativo criado pela TI.",
+    tag: { type: "private", label: "Uso interno" },
+    result: "Substitui a análise manual das faturas",
+    thumb: "assets/dda%20x%20sap%20conciliador.png",
+    link: null
+  },
+  {
+    title: "Controle Nota PJ",
+    desc: "Automatiza a cobrança de notas fiscais de prestadores, do controle ao e-mail pronto.",
+    tag: { type: "private", label: "Uso interno" },
+    result: "De horas para cerca de 5 minutos. Adotado por outras áreas",
+    thumb: "assets/meu%20linkedin.png",
+    link: null
+  },
+  {
+    title: "Contas a Receber",
+    desc: "Automatiza conciliação, confirmação de pagamento e cobrança por e-mail, com login por perfil. Iniciativa própria, construída com Claude Code.",
+    tag: { type: "dev", label: "Em desenvolvimento" },
+    result: null,
+    thumb: "assets/Contas%20a%20receber%20automatizado/Capa.png",
+    link: null
+  },
+  {
+    title: "Comparativo de Fluxo de Caixa",
+    desc: "Compara dois exports e mostra o que mudou entre datas.",
+    tag: { type: "private", label: "Ferramenta interna" },
+    result: "Resolveu uma análise que ninguém tinha automatizado",
+    thumb: "assets/dda%20x%20sap%20conciliador.png",
+    link: null
+  },
+  {
+    title: "Painéis em Power BI",
+    desc: "Painéis para gerência e diretoria, com atualização automática.",
+    tag: { type: "private", label: "Uso interno" },
+    result: null,
+    thumb: "assets/Dashboards/Capa%20BI%20Alavancagem.png",
+    link: null
+  },
+  {
+    title: "Sistema de Pedidos — Xbom Lanches",
+    desc: "A v1 é um cardápio digital que envia pedido pelo WhatsApp. A v2, já no ar para testes, traz checkout próprio com taxa por bairro, pizza meio a meio, pagamento Pix/cartão/dinheiro, acompanhamento em tempo real e painel admin. Next.js, Vercel e Claude Code.",
+    tag: { type: "live", label: "v1 em uso · v2 no ar" },
+    result: null,
+    thumb: "assets/Xbom/Inicio.png",
+    link: "https://xbom-lanches.vercel.app"
+  }
+];
+
+const howItems = [
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"></path><path d="M17 17l-4-4-4 4M7 7l4-4 4 4"></path></svg>`,
+    title: "Prototipagem em minutos",
+    desc: "Uso IA para ir do zero ao protótipo navegável em uma conversa. Valido hipóteses antes de escrever uma linha de código definitiva."
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>`,
+    title: "Código assistido do início ao fim",
+    desc: "Claude Code, Cursor, Copilot — a IA escreve, refatora, testa e documenta. Eu arquiteturo, reviso e decido."
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>`,
+    title: "Entrega contínua, feedback real",
+    desc: "Deploy na Vercel/Cloudflare, métricas no PostHog, erros no Sentry. O produto vive e melhora todo dia."
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
+    title: "Foco no problema, não na stack",
+    desc: "A tecnologia serve ao negócio. Escolho o mais simples que resolve — seja um script Python, um workflow no n8n ou um app Next.js."
+  }
+];
+
+// ===== THEME =====
+const themeToggle = document.getElementById('themeToggle');
+const htmlEl = document.documentElement;
+
+function getInitialTheme() {
+  const saved = localStorage.getItem('theme');
+  if (saved) return saved;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function applyTheme(theme) {
+  htmlEl.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+}
+
+applyTheme(getInitialTheme());
+
+themeToggle.addEventListener('click', () => {
+  const next = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  themeToggle.style.transform = 'scale(0.95)';
+  setTimeout(() => themeToggle.style.transform = '', 120);
+});
+
+// ===== INTERSECTION OBSERVER =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+// ===== RENDER PROJECTS =====
+const grid = document.getElementById('projectsGrid');
+projects.forEach((p, i) => {
+  const card = document.createElement('article');
+  card.className = 'card';
+  card.style.animationDelay = `${i * 60}ms`;
+
+  const tagClass = `tag ${p.tag.type}`;
+  const tagHtml = `<span class="${tagClass}">${p.tag.label}</span>`;
+
+  const thumbHtml = p.thumb
+    ? `<div class="card-thumb">
+         <img src="${p.thumb}" alt="" loading="lazy" onload="this.classList.add('loaded')">
+         <div class="thumb-placeholder">Adicione screenshot</div>
+       </div>`
+    : `<div class="card-thumb"><div class="thumb-placeholder">Screenshot do projeto</div></div>`;
+
+  const resultHtml = p.result
+    ? `<span class="result">${p.result}</span>`
+    : '';
+
+  const linkHtml = p.link
+    ? `<a class="link" href="${p.link}" target="_blank" rel="noopener noreferrer">Ver projeto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>`
+    : '';
+
+  card.innerHTML = `
+    <div class="card-header">
+      ${tagHtml}
+      <h3>${p.title}</h3>
+    </div>
+    <p>${p.desc}</p>
+    ${thumbHtml}
+    <div class="card-footer">
+      ${resultHtml}
+      ${linkHtml}
+    </div>
+  `;
+
+  grid.appendChild(card);
+  observer.observe(card);
+});
+
+// ===== RENDER HOW I WORK =====
+const howGrid = document.getElementById('howGrid');
+howItems.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.className = 'how-item';
+  div.style.animationDelay = `${i * 100}ms`;
+  div.innerHTML = `
+    <div class="how-icon">${item.icon}</div>
+    <h3>${item.title}</h3>
+    <p>${item.desc}</p>
+  `;
+  howGrid.appendChild(div);
+  observer.observe(div);
+});
+
+// ===== SMOOTH REVEAL ON SCROLL FOR HEADER =====
+const headerEls = document.querySelectorAll('header .animate-in');
+headerEls.forEach(el => el.classList.add('visible'));
+
+// ===== PARALLAX ORBS (subtle) =====
+const orbs = document.querySelectorAll('.orb');
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const y = window.scrollY * 0.15;
+        orbs.forEach((orb, i) => {
+          const speed = 0.08 + i * 0.04;
+          orb.style.transform = `translateY(${y * speed}px)`;
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+// ===== MICRO INTERACTION: BUTTON RIPPLE =====
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    ripple.style.cssText = `
+      position: absolute;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: scale(0);
+      animation: ripple 400ms ease-out;
+      pointer-events: none;
+      left: ${e.clientX - rect.left}px;
+      top: ${e.clientY - rect.top}px;
+      margin: -10px 0 0 -10px;
+    `;
+    this.style.position = 'relative';
+    this.style.overflow = 'hidden';
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 400);
+  });
+});
+
+const style = document.createElement('style');
+style.textContent = `@keyframes ripple { to { transform: scale(20); opacity: 0; } }`;
+document.head.appendChild(style);
+</script>
 </body>
 </html>
