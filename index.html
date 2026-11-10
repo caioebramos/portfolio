@@ -451,7 +451,7 @@ const projects = [
     desc: "Lê faturas de cada banco (Excel e PDF), projeta parcelas e gera indicadores. Roda dentro de um sistema corporativo criado pela TI.",
     tag: { type: "private", label: "Uso interno" },
     result: "Substitui a análise manual das faturas",
-    thumb: "assets/dda%20x%20sap%20conciliador.png",
+    thumb: null,
     link: null
   },
   {
@@ -459,7 +459,7 @@ const projects = [
     desc: "Automatiza a cobrança de notas fiscais de prestadores, do controle ao e-mail pronto.",
     tag: { type: "private", label: "Uso interno" },
     result: "De horas para cerca de 5 minutos. Adotado por outras áreas",
-    thumb: "assets/meu%20linkedin.png",
+    thumb: null,
     link: null
   },
   {
@@ -467,7 +467,7 @@ const projects = [
     desc: "Automatiza conciliação, confirmação de pagamento e cobrança por e-mail, com login por perfil. Iniciativa própria, construída com Claude Code.",
     tag: { type: "dev", label: "Em desenvolvimento" },
     result: null,
-    thumb: "assets/Contas%20a%20receber%20automatizado/Capa.png",
+    thumb: null,
     link: null
   },
   {
@@ -475,7 +475,7 @@ const projects = [
     desc: "Compara dois exports e mostra o que mudou entre datas.",
     tag: { type: "private", label: "Ferramenta interna" },
     result: "Resolveu uma análise que ninguém tinha automatizado",
-    thumb: "assets/dda%20x%20sap%20conciliador.png",
+    thumb: null,
     link: null
   },
   {
@@ -483,15 +483,15 @@ const projects = [
     desc: "Painéis para gerência e diretoria, com atualização automática.",
     tag: { type: "private", label: "Uso interno" },
     result: null,
-    thumb: "assets/Dashboards/Capa%20BI%20Alavancagem.png",
+    thumb: null,
     link: null
   },
   {
-    title: "Sistema de Pedidos — Xbom Lanches",
-    desc: "A v1 é um cardápio digital que envia pedido pelo WhatsApp. A v2, já no ar para testes, traz checkout próprio com taxa por bairro, pizza meio a meio, pagamento Pix/cartão/dinheiro, acompanhamento em tempo real e painel admin. Next.js, Vercel e Claude Code.",
-    tag: { type: "live", label: "v1 em uso · v2 no ar" },
+    title: "Sistema de pedidos para restaurante (Xbom Lanches)",
+    desc: "A v1 é um cardápio digital em que o cliente monta o pedido e o envia pelo WhatsApp do restaurante. A v2, já no ar para testes, traz checkout próprio com taxa de entrega por bairro, pizza meio a meio, pagamento por Pix, cartão ou dinheiro, acompanhamento do pedido em tempo real e painel administrativo com login. Next.js, Vercel e Claude Code.",
+    tag: { type: "live", label: "v1 em uso desde 2026 · v2 em desenvolvimento" },
     result: null,
-    thumb: "assets/Xbom/Inicio.png",
+    thumb: null,
     link: "https://xbom-lanches.vercel.app"
   }
 ];
@@ -568,14 +568,14 @@ projects.forEach((p, i) => {
          <img src="${p.thumb}" alt="" loading="lazy" onload="this.classList.add('loaded')">
          <div class="thumb-placeholder">Adicione screenshot</div>
        </div>`
-    : `<div class="card-thumb"><div class="thumb-placeholder">Screenshot do projeto</div></div>`;
+    : '';
 
   const resultHtml = p.result
     ? `<span class="result">${p.result}</span>`
     : '';
 
   const linkHtml = p.link
-    ? `<a class="link" href="${p.link}" target="_blank" rel="noopener noreferrer">Ver projeto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>`
+    ? `<a class="link" href="${p.link}" target="_blank" rel="noopener noreferrer">Ver a v2 no ar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>`
     : '';
 
   card.innerHTML = `
