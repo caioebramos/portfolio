@@ -1,2 +1,6 @@
-# capturas de tela de sistemas da empresa: nunca publicar
+# NUNCA publicar: capturas e originais podem ter dados reais da empresa
 /assets/
+/imagens portf*
+/originais/
+/previa-redacao/
+*.zip
