@@ -142,10 +142,14 @@ h2{font-size:var(--t2);line-height:1.08;font-weight:700}
 .do p{color:var(--muted);font-size:var(--t6);line-height:1.6}
 
 /* miniaturas */
+.note{display:flex;gap:14px;align-items:flex-start;margin:0 0 clamp(28px,4vw,44px);padding:16px 20px;border:1px solid var(--line2);border-left:3px solid var(--acc-s);border-radius:12px;background:var(--s1);max-width:52em}
+.note-ic{color:var(--acc);flex:none;margin-top:2px}
+.note p{color:var(--muted);font-size:var(--t6);line-height:1.6}
+.note strong{color:var(--ink);font-weight:600}
 .thumbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,24px)}
 .thumb{display:flex;flex-direction:column;text-decoration:none;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--s1);transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
 .thumb:hover{transform:translateY(-6px);border-color:var(--acc);box-shadow:0 24px 50px -20px rgba(109,85,245,.45)}
-.thumb-fig{aspect-ratio:16/10;overflow:hidden;background:#000;border-bottom:1px solid var(--line)}
+.thumb-fig{aspect-ratio:16/9;overflow:hidden;background:#000;border-bottom:1px solid var(--line)}
 .thumb-fig img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .7s var(--ease)}
 .thumb:hover .thumb-fig img{transform:scale(1.06)}
 .thumb-body{padding:18px 20px 22px;display:grid;gap:6px}
@@ -169,7 +173,7 @@ h2{font-size:var(--t2);line-height:1.08;font-weight:700}
 .vers dd strong{color:var(--ink);font-weight:600}
 .tools{display:flex;flex-wrap:wrap;gap:6px 8px}
 .tools li{font-size:var(--t6);font-weight:500;padding:4px 12px;border:1px solid var(--line2);border-radius:999px;color:var(--ink);background:rgba(255,255,255,.03)}
-.shots{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(14px,2.4vw,28px);margin:clamp(24px,4vw,44px) 0}
+.shots{align-items:start;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(14px,2.4vw,28px);margin:clamp(24px,4vw,44px) 0}
 
 /* moldura de janela (usada em Xbom e nos casos) */
 .frame{border:1px solid var(--line2);border-radius:14px;overflow:hidden;background:#000;box-shadow:0 30px 60px -30px rgba(0,0,0,.8);transition:transform .5s var(--ease),border-color .3s}
@@ -209,8 +213,6 @@ h2{font-size:var(--t2);line-height:1.08;font-weight:700}
 .tools-line h3{font-size:var(--t6);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:16px}
 
 /* contato e rodapé */
-.contact .box{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px 48px;padding:clamp(32px,5vw,64px);border:1px solid var(--line2);border-radius:28px;
-  background:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1.2px) 0 0/22px 22px,var(--s1)}
 .contact h2{font-size:var(--t2);margin:10px 0 0}
 footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);font-size:var(--t6)}
 .foot{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:32px}
@@ -221,10 +223,96 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
 .foot a:hover{color:var(--acc)}
 .copy{margin-top:36px;padding-top:22px;border-top:1px solid var(--line)}
 
+
+/* ===== movimento extra (tudo CSS; nada depende de JavaScript) ===== */
+.progress{position:fixed;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--acc-s),var(--acc));transform:scaleX(0);transform-origin:left;z-index:60;pointer-events:none}
+.eyebrow::before{content:"";display:inline-block;width:28px;height:2px;background:var(--acc);margin-right:10px;vertical-align:middle;border-radius:2px}
+.w{display:inline-block;animation:wup .9s var(--ease) both;animation-delay:calc(.12s + var(--i) * .075s)}
+@keyframes wup{from{opacity:0;transform:translateY(.55em) rotate(3deg)}to{opacity:1;transform:none}}
+h1 em{animation:glow 4.5s ease-in-out 1.6s infinite}
+@keyframes glow{0%,100%{text-shadow:0 0 0 rgba(155,140,255,0)}50%{text-shadow:0 0 30px rgba(155,140,255,.5)}}
+.hero-art{position:relative;justify-self:center;width:100%;max-width:440px}
+.hero-art .card-av{justify-self:auto}
+.orbit{position:absolute;inset:-9%;border-radius:50%;border:1px dashed rgba(155,140,255,.28);animation:rot 46s linear infinite;pointer-events:none}
+.orbit.o2{inset:-17%;border-style:dotted;border-color:rgba(255,255,255,.12);animation-duration:70s;animation-direction:reverse}
+.orbit::after{content:"";position:absolute;left:50%;top:-4px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--acc);box-shadow:0 0 14px 3px rgba(155,140,255,.7)}
+.orbit.o2::after{width:6px;height:6px;margin-left:-3px;top:-3px;background:#fff;box-shadow:0 0 10px 2px rgba(255,255,255,.5)}
+@keyframes rot{to{transform:rotate(360deg)}}
+.px{position:absolute;bottom:-10px;width:var(--s,3px);height:var(--s,3px);border-radius:50%;background:var(--acc);opacity:0;box-shadow:0 0 10px 2px rgba(155,140,255,.55);animation:rise 11s linear infinite;animation-delay:var(--d,0s);pointer-events:none}
+@keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:.8}90%{opacity:.5}100%{transform:translateY(-640px) translateX(24px);opacity:0}}
+.btn.pri{animation:btnp 3.2s ease-out infinite}
+@keyframes btnp{0%{box-shadow:0 0 0 0 rgba(109,85,245,.55)}70%{box-shadow:0 0 0 14px rgba(109,85,245,0)}100%{box-shadow:0 0 0 0 rgba(109,85,245,0)}}
+.marq{padding:0}
+.mi{overflow:hidden;padding:14px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.mi + .mi{border-top:1px solid var(--line)}
+.mi.rev ul{animation-direction:reverse;animation-duration:46s}
+.mi.rev li{color:var(--dim)}
+.timeline li::after{animation:dotp 3.2s ease-out infinite}
+.timeline li:nth-child(2)::after{animation-delay:.5s}.timeline li:nth-child(3)::after{animation-delay:1s}.timeline li:nth-child(4)::after{animation-delay:1.5s}
+@keyframes dotp{0%{box-shadow:0 0 0 0 rgba(109,85,245,.55)}70%{box-shadow:0 0 0 12px rgba(109,85,245,0)}100%{box-shadow:0 0 0 0 rgba(109,85,245,0)}}
+.duo .f2{animation:bob 7s ease-in-out infinite}
+.frame:hover{transform:translateY(-6px) perspective(900px) rotateX(1.5deg)}
+.thumb:hover .thumb-fig img{scale:1.07;transform:none}
+.contact .box{border-radius:28px;padding:1.5px;background:conic-gradient(from var(--ang),transparent 0 68%,var(--acc) 84%,transparent 96%),var(--line2);animation:spin 8s linear infinite}
+.contact .box-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px 48px;padding:clamp(32px,5vw,64px);border-radius:26.5px;
+  background:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1.2px) 0 0/22px 22px,var(--s1)}
+.do li::before{content:"";display:block;width:0;height:2px;background:var(--acc);margin-bottom:16px;transition:width .5s var(--ease)}
+.do li:hover::before{width:36px}
+
+@supports (animation-timeline:view()){
+  .progress{animation:prog linear both;animation-timeline:scroll(root)}
+  @keyframes prog{to{transform:scaleX(1)}}
+  .hero-art{animation:par linear both;animation-timeline:scroll(root);animation-range:0 90vh}
+  @keyframes par{to{transform:translateY(70px)}}
+  .hero .wrap>div:first-child{animation:heroout linear both;animation-timeline:scroll(root);animation-range:0 70vh}
+  @keyframes heroout{to{opacity:.3;transform:translateY(-36px)}}
+  .top{animation:topb linear both;animation-timeline:scroll(root);animation-range:0 160px}
+  @keyframes topb{to{background:rgba(11,11,16,.94);border-bottom-color:var(--line2)}}
+  .eyebrow::before{animation:eb linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+  @keyframes eb{from{width:0}to{width:28px}}
+  .sec-head h2{animation:hrev linear both;animation-timeline:view();animation-range:entry 0% entry 45%}
+  @keyframes hrev{from{clip-path:inset(0 0 100% 0);transform:translateY(22px)}to{clip-path:inset(0);transform:none}}
+  .thumbs .thumb:nth-child(3n+2){animation-range:entry 8% entry 40%}
+  .thumbs .thumb:nth-child(3n){animation-range:entry 16% entry 48%}
+  .frame img,.thumb-fig img{animation:imgp linear both;animation-timeline:view();animation-range:entry 0% cover 55%}
+  @keyframes imgp{from{transform:scale(1.07) translateY(-1.5%)}to{transform:scale(1) translateY(0)}}
+  .timeline li::before{transform-origin:left;animation:lineg linear both;animation-timeline:view();animation-range:entry 10% entry 70%}
+  @keyframes lineg{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .ico *{stroke-dasharray:80;animation:drawi linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+  @keyframes drawi{from{stroke-dashoffset:80}to{stroke-dashoffset:0}}
+}
+
+
+/* ===== micro-animações extras ===== */
+.who{display:flex;align-items:center;gap:22px}
+.me{width:104px;height:104px;flex:none;border-radius:50%;object-fit:cover;border:2px solid var(--acc);animation:ringp 3.4s ease-out infinite}
+@keyframes ringp{0%{box-shadow:0 0 0 0 rgba(155,140,255,.55)}70%{box-shadow:0 0 0 14px rgba(155,140,255,0)}100%{box-shadow:0 0 0 0 rgba(155,140,255,0)}}
+.who-sub{color:var(--muted);font-size:var(--t6);margin-top:6px}
+.cue{position:absolute;left:50%;bottom:16px;width:26px;height:42px;margin-left:-13px;border:1.5px solid var(--line2);border-radius:14px;display:block}
+.cue span{position:absolute;left:50%;top:8px;width:3px;height:8px;margin-left:-1.5px;border-radius:2px;background:var(--acc);animation:wheel 2s ease-in-out infinite}
+@keyframes wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(14px);opacity:0}100%{opacity:0}}
+.frame{position:relative}
+.frame::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.11) 50%,transparent 60%);transform:translateX(-130%);animation:sweep 9s ease-in-out infinite;pointer-events:none}
+.duo .f2::after{animation-delay:3s}.shots .frame:nth-child(2)::after{animation-delay:2s}
+@keyframes sweep{0%,60%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+.tools-line .tools li{animation:bob 6s ease-in-out infinite}
+.tools-line .tools li:nth-child(2n){animation-delay:-2s}.tools-line .tools li:nth-child(3n){animation-delay:-4s}.tools-line .tools li:nth-child(5n){animation-delay:-1s}
+.tools li{transition:border-color .25s,background .25s,transform .25s var(--ease)}
+.tools li:hover{border-color:var(--acc);background:rgba(155,140,255,.12);transform:translateY(-2px)}
+.facts div{transition:background .3s,padding-left .3s var(--ease)}
+.facts div:hover{background:rgba(255,255,255,.03);padding-left:10px}
+.foot a{background:linear-gradient(var(--acc),var(--acc)) 0 100%/0 1px no-repeat;transition:color .2s,background-size .35s var(--ease);padding-bottom:2px}
+.foot a:hover{background-size:100% 1px}
+.brand{transition:letter-spacing .35s var(--ease)}
+.brand:hover{letter-spacing:.01em}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .rv,.up{opacity:1!important;transform:none!important}
+  .rv,.up,.w{opacity:1!important;transform:none!important}
+  .progress,.orbit,.px,.cue{display:none}
+  .sec-head h2{clip-path:none!important}
+  .ico *{stroke-dashoffset:0!important}
   .marq ul{flex-wrap:wrap;width:auto;justify-content:center;gap:12px 36px}
   .marq li:nth-child(n+10){display:none}
 }
@@ -268,6 +356,7 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
 </head>
 <body>
 <a class="skip" href="#projetos">Pular para os projetos</a>
+<div class="progress" aria-hidden="true"></div>
 
 <header class="top">
   <div class="wrap">
@@ -287,25 +376,30 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
     <div class="wrap">
       <div>
         <p class="kicker up d1"><i aria-hidden="true"></i>Product Builder com IA · Rio Negro/PR</p>
-        <h1 id="titulo" class="up d2">Transformo processos manuais em <em>ferramentas com IA.</em></h1>
+        <h1 id="titulo"><span class="w" style="--i:0">Transformo</span> <span class="w" style="--i:1">processos</span> <span class="w" style="--i:2">manuais</span> <span class="w" style="--i:3">em</span> <em><span class="w" style="--i:4">ferramentas</span> <span class="w" style="--i:5">com</span> <span class="w" style="--i:6">IA.</span></em></h1>
         <p class="lead up d3">Estagiário no financeiro de uma empresa, construo sistemas e automações usados pela gerência, pela diretoria e por outras áreas, do problema ao sistema funcionando.</p>
         <div class="btn-row up d4">
           <a class="btn pri" href="#projetos">Ver projetos <svg class="arr" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="btn" href="https://www.linkedin.com/in/caioebramos/" target="_blank" rel="noopener">LinkedIn <svg class="arr" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
-      <div class="card-av up d3">
-        <div class="card-in">
-          <div class="av"><img src="img/avatar.webp" width="680" height="832" alt="Avatar em 3D de Caio Edgar Barbosa Ramos" fetchpriority="high"></div>
+      <div class="hero-art up d3">
+        <span class="orbit" aria-hidden="true"></span><span class="orbit o2" aria-hidden="true"></span>
+        <span class="px" aria-hidden="true" style="left:8%;--d:0s;--s:3px"></span><span class="px" aria-hidden="true" style="left:18%;--d:2.2s;--s:4px"></span><span class="px" aria-hidden="true" style="left:30%;--d:5s;--s:3px"></span><span class="px" aria-hidden="true" style="left:44%;--d:1.1s;--s:5px"></span><span class="px" aria-hidden="true" style="left:57%;--d:6.4s;--s:3px"></span><span class="px" aria-hidden="true" style="left:68%;--d:3.3s;--s:4px"></span><span class="px" aria-hidden="true" style="left:79%;--d:8s;--s:3px"></span><span class="px" aria-hidden="true" style="left:90%;--d:4.4s;--s:5px"></span><span class="px" aria-hidden="true" style="left:36%;--d:7.7s;--s:3px"></span>
+        <div class="card-av">
+          <div class="card-in">
+            <div class="av"><img src="img/avatar.webp" width="680" height="832" alt="Avatar em 3D de Caio Edgar Barbosa Ramos" fetchpriority="high"></div>
+          </div>
+          <div class="chip c2" aria-hidden="true"><span>Do problema<b>ao sistema no ar</b></span></div>
         </div>
-        <div class="chip c1" aria-hidden="true"><span>Claude Code<b>parceiro de construção</b></span></div>
-        <div class="chip c2" aria-hidden="true"><span>Do problema<b>ao sistema no ar</b></span></div>
       </div>
     </div>
+    <a class="cue" href="#faco" aria-label="Rolar para baixo"><span></span></a>
   </section>
 
   <div class="marq" aria-label="Ferramentas">
-    <ul><li>Claude Code</li><li>Power BI</li><li>Excel avançado</li><li>Power Query</li><li>VBA</li><li>Python e SQL (com apoio de IA)</li><li>GitHub</li><li>Next.js</li><li>Vercel</li><li aria-hidden="true">Claude Code</li><li aria-hidden="true">Power BI</li><li aria-hidden="true">Excel avançado</li><li aria-hidden="true">Power Query</li><li aria-hidden="true">VBA</li><li aria-hidden="true">Python e SQL (com apoio de IA)</li><li aria-hidden="true">GitHub</li><li aria-hidden="true">Next.js</li><li aria-hidden="true">Vercel</li></ul>
+    <div class="mi"><ul><li>Ferramentas de IA</li><li>Power BI</li><li>Excel avançado</li><li>Power Query</li><li>VBA</li><li>Python</li><li>SQL</li><li>Figma</li><li>GitHub</li><li>Next.js</li><li>React</li><li>TypeScript</li><li>Vercel</li><li aria-hidden="true">Ferramentas de IA</li><li aria-hidden="true">Power BI</li><li aria-hidden="true">Excel avançado</li><li aria-hidden="true">Power Query</li><li aria-hidden="true">VBA</li><li aria-hidden="true">Python</li><li aria-hidden="true">SQL</li><li aria-hidden="true">Figma</li><li aria-hidden="true">GitHub</li><li aria-hidden="true">Next.js</li><li aria-hidden="true">React</li><li aria-hidden="true">TypeScript</li><li aria-hidden="true">Vercel</li></ul></div>
+    <div class="mi rev" aria-hidden="true"><ul><li>Vercel</li><li>TypeScript</li><li>React</li><li>Next.js</li><li>GitHub</li><li>Figma</li><li>SQL</li><li>Python</li><li>VBA</li><li>Power Query</li><li>Excel avançado</li><li>Power BI</li><li>Ferramentas de IA</li><li>Vercel</li><li>TypeScript</li><li>React</li><li>Next.js</li><li>GitHub</li><li>Figma</li><li>SQL</li><li>Python</li><li>VBA</li><li>Power Query</li><li>Excel avançado</li><li>Power BI</li><li>Ferramentas de IA</li></ul></div>
   </div>
 
   <section id="faco" aria-labelledby="faco-t">
@@ -318,7 +412,7 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
         <li><svg class="ico" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7.5 12h9M14 8.5l3.5 3.5-3.5 3.5"/><circle cx="4.5" cy="12" r="2.5"/><circle cx="19.5" cy="12" r="2.5"/></svg><h3>Automação de processos</h3><p>Tarefas manuais viram fluxos que rodam em minutos.</p></li>
         <li><svg class="ico" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 14h6"/></svg><h3>Ferramentas internas</h3><p>Sistemas usados por gerência, diretoria e outras áreas.</p></li>
         <li><svg class="ico" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20V11M10 20V4M16 20v-7M21 20H3"/></svg><h3>Painéis e análise de dados</h3><p>Informação atualizada para quem decide, sem refazer planilha.</p></li>
-        <li><svg class="ico" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3zM4 7.5 12 12l8-4.5M12 12v9"/></svg><h3>Produtos do zero</h3><p>Do problema ao sistema no ar, construindo com Claude Code.</p></li>
+        <li><svg class="ico" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3zM4 7.5 12 12l8-4.5M12 12v9"/></svg><h3>Produtos do zero</h3><p>Do problema ao sistema no ar, construindo com IA.</p></li>
       </ul>
     </div>
   </section>
@@ -328,27 +422,31 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
       <div class="sec-head rv">
         <span class="eyebrow">Projetos selecionados</span>
         <h2 id="projetos-t">Do problema ao resultado</h2>
-        <p class="sec-sub">Cada projeto leva ao estudo de caso completo. Nas capturas, nomes, valores e logotipos da empresa estão desfocados.</p>
+        <p class="sec-sub">Cada projeto leva ao estudo de caso completo.</p>
       </div>
+      <aside class="note rv" aria-label="Sobre as imagens">
+        <span class="note-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+        <p><strong>Sobre as imagens.</strong> As telas são capturas reais dos sistemas que construí. Valores, nomes de pessoas e logotipos da empresa foram desfocados para proteger os dados; o layout e o funcionamento são os reais.</p>
+      </aside>
       <div class="thumbs">
         <a class="thumb rv" href="#cartoes">
-          <div class="thumb-fig"><img src="img/cartoes.webp" width="1600" height="676" alt="Captura do painel de faturas de cartão, com gráfico do cronograma e tabelas. Nomes, bancos e valores estão desfocados." loading="lazy" decoding="async"></div>
+          <div class="thumb-fig"><img style="object-position:50% 30%" src="img/cartoes-capa.webp" width="1350" height="470" alt="Tela de entrada do sistema de faturas de cartão, com o título Suas faturas de cartão, sob controle total e a escolha do banco. Logotipos e nomes dos bancos estão desfocados." loading="lazy" decoding="async"></div>
           <div class="thumb-body"><span class="cat">Ferramenta interna</span><h3>Controle de Cartões</h3><span class="status"><i class="dot on" aria-hidden="true"></i>Em uso</span></div>
         </a>
         <a class="thumb rv" href="#nota-pj">
-          <div class="thumb-fig"><img src="img/nota-pj.webp" width="1600" height="655" alt="Captura da planilha de controle de notas de prestadores, com status e datas. Nomes, valores e quantidades estão desfocados." loading="lazy" decoding="async"></div>
+          <div class="thumb-fig"><img style="object-position:8% 0%" src="img/nota-pj.webp" width="1600" height="655" alt="Captura da planilha de controle de notas de prestadores, com status e datas. Nomes, valores e quantidades estão desfocados." loading="lazy" decoding="async"></div>
           <div class="thumb-body"><span class="cat">Automação de processos</span><h3>Controle Nota PJ</h3><span class="status"><i class="dot on" aria-hidden="true"></i>Em uso</span></div>
         </a>
         <a class="thumb rv" href="#receber">
-          <div class="thumb-fig"><img src="img/receber-capa.webp" width="1600" height="586" alt="Tela de entrada do sistema Contas a Receber, com o título e o botão Entrar. O logotipo da empresa está desfocado." loading="lazy" decoding="async"></div>
-          <div class="thumb-body"><span class="cat">Produto do zero</span><h3>Contas a Receber</h3><span class="status"><i class="dot wip" aria-hidden="true"></i>Em desenvolvimento</span></div>
+          <div class="thumb-fig"><img style="object-position:50% 0%" src="img/receber.webp" width="1600" height="587" alt="Tela inicial do sistema Contas a Receber Automatizado, com gráfico por semana de vencimento. Nome do usuário, valores e logotipo estão desfocados." loading="lazy" decoding="async"></div>
+          <div class="thumb-body"><span class="cat">Produto do zero</span><h3>Contas a Receber Automatizado</h3><span class="status"><i class="dot wip" aria-hidden="true"></i>Em desenvolvimento</span></div>
         </a>
         <a class="thumb rv" href="#fluxo">
-          <div class="thumb-fig"><img src="img/fluxo.webp" width="1600" height="462" alt="Captura da planilha comparativa de fluxo de caixa, com status, categorias e datas. Descrições e valores estão desfocados." loading="lazy" decoding="async"></div>
+          <div class="thumb-fig"><img style="object-position:50% 0%" src="img/fluxo-analise.webp" width="830" height="497" alt="Planilha de análise detalhada do fluxo de caixa, por categoria, com média de dias de atraso. Quantidades e impactos estão desfocados." loading="lazy" decoding="async"></div>
           <div class="thumb-body"><span class="cat">Análise de dados</span><h3>Comparativo de fluxo de caixa</h3><span class="status"><i class="dot on" aria-hidden="true"></i>Em uso</span></div>
         </a>
         <a class="thumb rv" href="#bi">
-          <div class="thumb-fig"><img src="img/bi-capa.webp" width="1600" height="580" alt="Capa do painel em Power BI, Posição financeira, com cartões de resumo. Valores, nomes e logotipo estão desfocados." loading="lazy" decoding="async"></div>
+          <div class="thumb-fig"><img style="object-position:50% 0%" src="img/bi-capa.webp" width="1600" height="580" alt="Capa do painel em Power BI, Posição financeira, em tema escuro, com cartões de resumo e atalhos para as páginas Alavancagem, Aplicações Fechado e Aplicações Hoje. Valores e logotipo estão desfocados." loading="lazy" decoding="async"></div>
           <div class="thumb-body"><span class="cat">Painéis e análise de dados</span><h3>Painéis em Power BI</h3><span class="status"><i class="dot on" aria-hidden="true"></i>Em uso</span></div>
         </a>
         <a class="thumb rv" href="#produto">
@@ -370,7 +468,7 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
           <p class="case-meta"><span class="status"><i class="dot on" aria-hidden="true"></i>v1 em uso desde 2026 · v2 no ar para testes</span></p>
           <h3>Sistema de pedidos para restaurante (Xbom Lanches)</h3>
           <p class="case-sum">Cardápio digital, checkout e painel administrativo para um restaurante que não tinha canal próprio de pedidos.</p>
-          <ul class="tools" aria-label="Ferramentas"><li>Next.js</li><li>Vercel</li><li>Claude Code</li></ul>
+          <ul class="tools" aria-label="Ferramentas"><li>IA</li><li>Next.js</li><li>React</li><li>TypeScript</li><li>Tailwind CSS</li><li>SQLite</li><li>Vercel</li><li>GitHub</li></ul>
         </div>
         <dl class="vers">
           <div><dt>v1</dt><dd><strong>Em uso.</strong> Cardápio digital em que o cliente monta o pedido e o envia pelo WhatsApp do restaurante.</dd></div>
@@ -396,7 +494,7 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
       </div>
 
       <article class="case" id="cartoes" aria-labelledby="cartoes-t">
-        <figure class="case-fig rv"><div class="frame "><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/cartoes.webp" width="1600" height="676" alt="Captura do painel de faturas de cartão, com gráfico do cronograma e tabelas. Nomes, bancos e valores estão desfocados." loading="lazy" decoding="async"></div><figcaption>Captura com dados ocultados.</figcaption></figure>
+        <figure class="case-fig rv"><div class="duo"><div class="frame "><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/cartoes-capa.webp" width="1350" height="470" alt="Tela de entrada do sistema de faturas de cartão, com o título Suas faturas de cartão, sob controle total e a escolha do banco. Logotipos e nomes dos bancos estão desfocados." loading="lazy" decoding="async"></div><div class="frame f2"><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/cartoes-painel.webp" width="1600" height="677" alt="Painel de faturas de cartão, com gráfico do cronograma de parcelas e tabelas. Nomes, bancos e valores estão desfocados." loading="lazy" decoding="async"></div></div><figcaption>Captura real, com dados desfocados.</figcaption></figure>
         <!-- ALTERNATIVA (ilustração de fluxo, sem dados): <svg class="flow flow-h" viewBox="0 0 520 250" role="img" aria-label="Fluxo: faturas dos bancos em Excel e PDF, leitura e projeção de parcelas, indicadores de compromisso futuro" xmlns="http://www.w3.org/2000/svg"><text x="0" y="34" class="flow-cap">Entrada</text><rect x="0" y="56" width="152" height="138" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="76.0" y="108.0" text-anchor="middle" class="flow-t1" fill="var(--ink)">Faturas</text><text x="76.0" y="130.0" text-anchor="middle" class="flow-t" fill="var(--ink)">dos bancos</text><text x="76.0" y="152.0" text-anchor="middle" class="flow-t" fill="var(--ink)">(Excel e PDF)</text><path d="M158 125.0 h20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M172 119.0 l7 6 l-7 6" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="184" y="34" class="flow-cap">Processo</text><rect x="184" y="56" width="152" height="138" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/><text x="260.0" y="108.0" text-anchor="middle" class="flow-t1" fill="#ffffff">Leitura e</text><text x="260.0" y="130.0" text-anchor="middle" class="flow-t" fill="#ffffff">projeção de</text><text x="260.0" y="152.0" text-anchor="middle" class="flow-t" fill="#ffffff">parcelas</text><path d="M342 125.0 h20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M356 119.0 l7 6 l-7 6" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="368" y="34" class="flow-cap">Saída</text><rect x="368" y="56" width="152" height="138" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="444.0" y="108.0" text-anchor="middle" class="flow-t1" fill="var(--ink)">Indicadores de</text><text x="444.0" y="130.0" text-anchor="middle" class="flow-t" fill="var(--ink)">compromisso</text><text x="444.0" y="152.0" text-anchor="middle" class="flow-t" fill="var(--ink)">futuro</text><line x1="0" y1="226" x2="520" y2="226" stroke="var(--line)" stroke-width="1"/><text x="0" y="243" class="flow-note">Fluxo ilustrativo, sem dados nem telas reais.</text></svg><svg class="flow flow-v" viewBox="0 0 320 418" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="320" height="104" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="16" y="24" class="flow-cap" fill="var(--muted)" style="fill:var(--muted)">Entrada</text><text x="16" y="52" class="flow-t1" fill="var(--ink)">Faturas</text><text x="16" y="72" class="flow-t" fill="var(--ink)">dos bancos</text><text x="16" y="92" class="flow-t" fill="var(--ink)">(Excel e PDF)</text><path d="M160.0 110 v20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M154.0 124 l6 7 l6 -7" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="0" y="138" width="320" height="104" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/><text x="16" y="162" class="flow-cap" fill="#E6DFF8" style="fill:#E6DFF8">Processo</text><text x="16" y="190" class="flow-t1" fill="#ffffff">Leitura e</text><text x="16" y="210" class="flow-t" fill="#ffffff">projeção de</text><text x="16" y="230" class="flow-t" fill="#ffffff">parcelas</text><path d="M160.0 248 v20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M154.0 262 l6 7 l6 -7" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="0" y="276" width="320" height="104" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="16" y="300" class="flow-cap" fill="var(--muted)" style="fill:var(--muted)">Saída</text><text x="16" y="328" class="flow-t1" fill="var(--ink)">Indicadores de</text><text x="16" y="348" class="flow-t" fill="var(--ink)">compromisso</text><text x="16" y="368" class="flow-t" fill="var(--ink)">futuro</text><text x="0" y="412" class="flow-note">Fluxo ilustrativo, sem dados nem telas reais.</text></svg> -->
         <div class="case-body rv">
           <p class="case-meta"><span class="num">Caso 01</span><span class="status"><i class="dot on" aria-hidden="true"></i>Em uso</span></p>
@@ -406,12 +504,12 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
             <div><dt>O problema</dt><dd>Analisar as faturas de cada banco, uma a uma, em planilha.</dd></div>
             <div><dt>O que construí</dt><dd>Sistema que lê as faturas (Excel e PDF), projeta as parcelas e gera indicadores de compromisso futuro.</dd></div>
             <div><dt>Resultado</dt><dd>Visão consolidada, sem exportação nem análise manual. Roda dentro de um sistema corporativo criado pela TI.</dd></div>
-            <div><dt>Ferramentas</dt><dd><ul class="tools"><li>Claude Code</li><li>Python</li><li>SQL</li><li>GitHub</li></ul></dd></div>
+            <div><dt>Ferramentas</dt><dd><ul class="tools"><li>IA</li><li>Python</li><li>SQL</li><li>Excel avançado</li><li>Leitura de PDF</li><li>GitHub</li></ul></dd></div>
           </dl>
         </div>
       </article>
       <article class="case" id="nota-pj" aria-labelledby="nota-pj-t">
-        <figure class="case-fig rv"><div class="frame "><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/nota-pj.webp" width="1600" height="655" alt="Captura da planilha de controle de notas de prestadores, com status e datas. Nomes, valores e quantidades estão desfocados." loading="lazy" decoding="async"></div><figcaption>Captura com dados ocultados.</figcaption></figure>
+        <figure class="case-fig rv"><div class="frame "><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/nota-pj.webp" width="1600" height="655" alt="Captura da planilha de controle de notas de prestadores, com status e datas. Nomes, valores e quantidades estão desfocados." loading="lazy" decoding="async"></div><figcaption>Captura real, com dados desfocados.</figcaption></figure>
         <!-- ALTERNATIVA (ilustração de fluxo, sem dados): <svg class="flow flow-h" viewBox="0 0 520 250" role="img" aria-label="Fluxo: controle de prestadores, verificação de quem enviou e quem está no prazo, e-mail de cobrança pronto" xmlns="http://www.w3.org/2000/svg"><text x="0" y="34" class="flow-cap">Entrada</text><rect x="0" y="56" width="152" height="138" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="76.0" y="108.0" text-anchor="middle" class="flow-t1" fill="var(--ink)">Controle de</text><text x="76.0" y="130.0" text-anchor="middle" class="flow-t" fill="var(--ink)">prestadores</text><text x="76.0" y="152.0" text-anchor="middle" class="flow-t" fill="var(--ink)">e notas</text><path d="M158 125.0 h20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M172 119.0 l7 6 l-7 6" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="184" y="34" class="flow-cap">Processo</text><rect x="184" y="56" width="152" height="138" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/><text x="260.0" y="97.0" text-anchor="middle" class="flow-t1" fill="#ffffff">Quem enviou,</text><text x="260.0" y="119.0" text-anchor="middle" class="flow-t" fill="#ffffff">quem está</text><text x="260.0" y="141.0" text-anchor="middle" class="flow-t" fill="#ffffff">no prazo e quem</text><text x="260.0" y="163.0" text-anchor="middle" class="flow-t" fill="#ffffff">precisa enviar</text><path d="M342 125.0 h20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M356 119.0 l7 6 l-7 6" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="368" y="34" class="flow-cap">Saída</text><rect x="368" y="56" width="152" height="138" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="444.0" y="108.0" text-anchor="middle" class="flow-t1" fill="var(--ink)">E-mail de</text><text x="444.0" y="130.0" text-anchor="middle" class="flow-t" fill="var(--ink)">cobrança pronto</text><text x="444.0" y="152.0" text-anchor="middle" class="flow-t" fill="var(--ink)">com anexo</text><line x1="0" y1="226" x2="520" y2="226" stroke="var(--line)" stroke-width="1"/><text x="0" y="243" class="flow-note">Fluxo ilustrativo, sem dados nem telas reais.</text></svg><svg class="flow flow-v" viewBox="0 0 320 418" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="320" height="104" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="16" y="24" class="flow-cap" fill="var(--muted)" style="fill:var(--muted)">Entrada</text><text x="16" y="52" class="flow-t1" fill="var(--ink)">Controle de</text><text x="16" y="72" class="flow-t" fill="var(--ink)">prestadores</text><text x="16" y="92" class="flow-t" fill="var(--ink)">e notas</text><path d="M160.0 110 v20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M154.0 124 l6 7 l6 -7" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="0" y="138" width="320" height="104" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/><text x="16" y="162" class="flow-cap" fill="#E6DFF8" style="fill:#E6DFF8">Processo</text><text x="16" y="190" class="flow-t1" fill="#ffffff">Quem enviou,</text><text x="16" y="210" class="flow-t" fill="#ffffff">quem está no prazo,</text><text x="16" y="230" class="flow-t" fill="#ffffff">quem precisa enviar</text><path d="M160.0 248 v20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M154.0 262 l6 7 l6 -7" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="0" y="276" width="320" height="104" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="16" y="300" class="flow-cap" fill="var(--muted)" style="fill:var(--muted)">Saída</text><text x="16" y="328" class="flow-t1" fill="var(--ink)">E-mail de</text><text x="16" y="348" class="flow-t" fill="var(--ink)">cobrança pronto</text><text x="16" y="368" class="flow-t" fill="var(--ink)">com anexo</text><text x="0" y="412" class="flow-note">Fluxo ilustrativo, sem dados nem telas reais.</text></svg> -->
         <div class="case-body rv">
           <p class="case-meta"><span class="num">Caso 02</span><span class="status"><i class="dot on" aria-hidden="true"></i>Em uso</span></p>
@@ -421,27 +519,27 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
             <div><dt>O problema</dt><dd>Cobrar as notas fiscais de prestadores PJ, conciliando quem já enviou e escrevendo e-mail por e-mail.</dd></div>
             <div><dt>O que construí</dt><dd>Automação que importa os dados, mostra quem enviou, quem está no prazo e quem precisa enviar, e gera o e-mail de cobrança pronto, com destinatários, cópia, texto e anexo.</dd></div>
             <div><dt>Resultado</dt><dd>De horas de trabalho manual para cerca de 5 minutos. Adotado por outras áreas.</dd></div>
-            <div><dt>Ferramentas</dt><dd><ul class="tools"><li>Excel</li><li>Power Query</li><li>VBA</li><li>Outlook</li></ul></dd></div>
+            <div><dt>Ferramentas</dt><dd><ul class="tools"><li>Excel avançado</li><li>Power Query</li><li>VBA</li><li>Outlook</li><li>IA</li></ul></dd></div>
           </dl>
         </div>
       </article>
       <article class="case" id="receber" aria-labelledby="receber-t">
-        <figure class="case-fig rv"><div class="duo"><div class="frame "><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/receber-capa.webp" width="1600" height="586" alt="Tela de entrada do sistema Contas a Receber, com o título e o botão Entrar. O logotipo da empresa está desfocado." loading="lazy" decoding="async"></div><div class="frame f2"><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/receber.webp" width="1600" height="587" alt="Tela inicial do sistema Contas a Receber, com gráfico por semana de vencimento. Nome do usuário, valores e logotipo estão desfocados." loading="lazy" decoding="async"></div></div><figcaption>Captura com dados ocultados.</figcaption></figure>
+        <figure class="case-fig rv"><div class="duo"><div class="frame "><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/receber-capa.webp" width="1600" height="586" alt="Tela de entrada do sistema Contas a Receber Automatizado, com o título e o botão Entrar. O logotipo da empresa está desfocado." loading="lazy" decoding="async"></div><div class="frame f2"><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/receber.webp" width="1600" height="587" alt="Tela inicial do sistema Contas a Receber Automatizado, com gráfico por semana de vencimento. Nome do usuário, valores e logotipo estão desfocados." loading="lazy" decoding="async"></div></div><figcaption>Captura real, com dados desfocados.</figcaption></figure>
         <!-- ALTERNATIVA (ilustração de fluxo, sem dados): <svg class="flow flow-h" viewBox="0 0 520 250" role="img" aria-label="Fluxo: export do ERP, conciliação automática, confirmação de pagamento e cobrança por e-mail" xmlns="http://www.w3.org/2000/svg"><text x="0" y="34" class="flow-cap">Entrada</text><rect x="0" y="56" width="152" height="138" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="76.0" y="119.0" text-anchor="middle" class="flow-t1" fill="var(--ink)">Export</text><text x="76.0" y="141.0" text-anchor="middle" class="flow-t" fill="var(--ink)">do ERP</text><path d="M158 125.0 h20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M172 119.0 l7 6 l-7 6" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="184" y="34" class="flow-cap">Processo</text><rect x="184" y="56" width="152" height="138" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/><text x="260.0" y="119.0" text-anchor="middle" class="flow-t1" fill="#ffffff">Conciliação</text><text x="260.0" y="141.0" text-anchor="middle" class="flow-t" fill="#ffffff">automática</text><path d="M342 125.0 h20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M356 119.0 l7 6 l-7 6" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="368" y="34" class="flow-cap">Saída</text><rect x="368" y="56" width="152" height="138" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="444.0" y="97.0" text-anchor="middle" class="flow-t1" fill="var(--ink)">Confirmação de</text><text x="444.0" y="119.0" text-anchor="middle" class="flow-t" fill="var(--ink)">pagamento e</text><text x="444.0" y="141.0" text-anchor="middle" class="flow-t" fill="var(--ink)">cobrança</text><text x="444.0" y="163.0" text-anchor="middle" class="flow-t" fill="var(--ink)">por e-mail</text><line x1="0" y1="226" x2="520" y2="226" stroke="var(--line)" stroke-width="1"/><text x="0" y="243" class="flow-note">Fluxo ilustrativo, sem dados nem telas reais.</text></svg><svg class="flow flow-v" viewBox="0 0 320 418" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="320" height="104" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="16" y="24" class="flow-cap" fill="var(--muted)" style="fill:var(--muted)">Entrada</text><text x="16" y="60" class="flow-t1" fill="var(--ink)">Export</text><text x="16" y="80" class="flow-t" fill="var(--ink)">do ERP</text><path d="M160.0 110 v20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M154.0 124 l6 7 l6 -7" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="0" y="138" width="320" height="104" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/><text x="16" y="162" class="flow-cap" fill="#E6DFF8" style="fill:#E6DFF8">Processo</text><text x="16" y="198" class="flow-t1" fill="#ffffff">Conciliação</text><text x="16" y="218" class="flow-t" fill="#ffffff">automática</text><path d="M160.0 248 v20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M154.0 262 l6 7 l6 -7" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="0" y="276" width="320" height="104" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="16" y="300" class="flow-cap" fill="var(--muted)" style="fill:var(--muted)">Saída</text><text x="16" y="328" class="flow-t1" fill="var(--ink)">Confirmação de</text><text x="16" y="348" class="flow-t" fill="var(--ink)">pagamento e cobrança</text><text x="16" y="368" class="flow-t" fill="var(--ink)">por e-mail</text><text x="0" y="412" class="flow-note">Fluxo ilustrativo, sem dados nem telas reais.</text></svg> -->
         <div class="case-body rv">
           <p class="case-meta"><span class="num">Caso 03</span><span class="status"><i class="dot wip" aria-hidden="true"></i>Em desenvolvimento</span></p>
-          <h3 id="receber-t">Contas a Receber</h3>
+          <h3 id="receber-t">Contas a Receber Automatizado</h3>
           <p class="case-sum">Conciliação, confirmação de pagamento e cobrança em um só lugar.</p>
           <dl class="facts">
             <div><dt>O problema</dt><dd>Conciliar recebimentos, confirmar pagamentos e cobrar clientes manualmente.</dd></div>
             <div><dt>O que construí</dt><dd>Plataforma que concilia a partir do export do ERP, confirma pagamentos e cobra por e-mail, com login por perfil (gerência e analistas).</dd></div>
             <div><dt>Resultado</dt><dd>Em desenvolvimento, por iniciativa própria, com expansão prevista para Contas a Pagar.</dd></div>
-            <div><dt>Ferramentas</dt><dd><ul class="tools"><li>Claude Code</li></ul></dd></div>
+            <div><dt>Ferramentas</dt><dd><ul class="tools"><li>IA</li><li>Export do SAP</li><li>Excel avançado</li><li>Power Query</li><li>Outlook</li><li>GitHub</li></ul></dd></div>
           </dl>
         </div>
       </article>
       <article class="case" id="fluxo" aria-labelledby="fluxo-t">
-        <figure class="case-fig rv"><div class="frame "><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/fluxo.webp" width="1600" height="462" alt="Captura da planilha comparativa de fluxo de caixa, com status, categorias e datas. Descrições e valores estão desfocados." loading="lazy" decoding="async"></div><figcaption>Captura com dados ocultados.</figcaption></figure>
+        <figure class="case-fig rv"><div class="duo"><div class="frame "><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/fluxo-analise.webp" width="830" height="497" alt="Planilha de análise detalhada do fluxo de caixa, por categoria, com média de dias de atraso. Quantidades e impactos estão desfocados." loading="lazy" decoding="async"></div><div class="frame f2"><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/fluxo.webp" width="1600" height="462" alt="Planilha comparativa de fluxo de caixa entre duas datas, com status, categorias e datas. Descrições e valores estão desfocados." loading="lazy" decoding="async"></div></div><figcaption>Captura real, com dados desfocados.</figcaption></figure>
         <!-- ALTERNATIVA (ilustração de fluxo, sem dados): <svg class="flow flow-h" viewBox="0 0 520 250" role="img" aria-label="Fluxo: dois exports em datas diferentes, comparação item a item, itens novos, removidos, postergados e antecipados" xmlns="http://www.w3.org/2000/svg"><text x="0" y="34" class="flow-cap">Entrada</text><rect x="0" y="56" width="152" height="138" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="76.0" y="108.0" text-anchor="middle" class="flow-t1" fill="var(--ink)">Dois exports</text><text x="76.0" y="130.0" text-anchor="middle" class="flow-t" fill="var(--ink)">em datas</text><text x="76.0" y="152.0" text-anchor="middle" class="flow-t" fill="var(--ink)">diferentes</text><path d="M158 125.0 h20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M172 119.0 l7 6 l-7 6" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="184" y="34" class="flow-cap">Processo</text><rect x="184" y="56" width="152" height="138" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/><text x="260.0" y="119.0" text-anchor="middle" class="flow-t1" fill="#ffffff">Comparação</text><text x="260.0" y="141.0" text-anchor="middle" class="flow-t" fill="#ffffff">item a item</text><path d="M342 125.0 h20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M356 119.0 l7 6 l-7 6" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="368" y="34" class="flow-cap">Saída</text><rect x="368" y="56" width="152" height="138" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="444.0" y="108.0" text-anchor="middle" class="flow-t1" fill="var(--ink)">Novos, removidos,</text><text x="444.0" y="130.0" text-anchor="middle" class="flow-t" fill="var(--ink)">postergados e</text><text x="444.0" y="152.0" text-anchor="middle" class="flow-t" fill="var(--ink)">antecipados</text><line x1="0" y1="226" x2="520" y2="226" stroke="var(--line)" stroke-width="1"/><text x="0" y="243" class="flow-note">Fluxo ilustrativo, sem dados nem telas reais.</text></svg><svg class="flow flow-v" viewBox="0 0 320 418" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="320" height="104" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="16" y="24" class="flow-cap" fill="var(--muted)" style="fill:var(--muted)">Entrada</text><text x="16" y="52" class="flow-t1" fill="var(--ink)">Dois exports</text><text x="16" y="72" class="flow-t" fill="var(--ink)">em datas</text><text x="16" y="92" class="flow-t" fill="var(--ink)">diferentes</text><path d="M160.0 110 v20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M154.0 124 l6 7 l6 -7" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="0" y="138" width="320" height="104" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/><text x="16" y="162" class="flow-cap" fill="#E6DFF8" style="fill:#E6DFF8">Processo</text><text x="16" y="198" class="flow-t1" fill="#ffffff">Comparação</text><text x="16" y="218" class="flow-t" fill="#ffffff">item a item</text><path d="M160.0 248 v20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M154.0 262 l6 7 l6 -7" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="0" y="276" width="320" height="104" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="16" y="300" class="flow-cap" fill="var(--muted)" style="fill:var(--muted)">Saída</text><text x="16" y="328" class="flow-t1" fill="var(--ink)">Novos, removidos,</text><text x="16" y="348" class="flow-t" fill="var(--ink)">postergados e</text><text x="16" y="368" class="flow-t" fill="var(--ink)">antecipados</text><text x="0" y="412" class="flow-note">Fluxo ilustrativo, sem dados nem telas reais.</text></svg> -->
         <div class="case-body rv">
           <p class="case-meta"><span class="num">Caso 04</span><span class="status"><i class="dot on" aria-hidden="true"></i>Em uso</span></p>
@@ -451,12 +549,12 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
             <div><dt>O problema</dt><dd>Ninguém sabia dizer rápido o que mudou no fluxo de caixa entre duas datas.</dd></div>
             <div><dt>O que construí</dt><dd>Ferramenta que compara dois exports e mostra itens novos, removidos, postergados e antecipados, com o impacto por categoria.</dd></div>
             <div><dt>Resultado</dt><dd>Uma análise que ninguém na empresa tinha automatizado e que várias áreas queriam.</dd></div>
-            <div><dt>Ferramentas</dt><dd><ul class="tools"><li>Excel</li><li>Power Query</li><li>VBA</li></ul></dd></div>
+            <div><dt>Ferramentas</dt><dd><ul class="tools"><li>Excel avançado</li><li>Power Query</li><li>VBA</li><li>IA</li></ul></dd></div>
           </dl>
         </div>
       </article>
       <article class="case" id="bi" aria-labelledby="bi-t">
-        <figure class="case-fig rv"><div class="duo"><div class="frame "><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/bi-capa.webp" width="1600" height="580" alt="Capa do painel em Power BI, Posição financeira, com cartões de resumo. Valores, nomes e logotipo estão desfocados." loading="lazy" decoding="async"></div><div class="frame f2"><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/bi-alavancagem.webp" width="1600" height="584" alt="Página Alavancagem do painel em Power BI, com indicadores e gráfico de pagamentos. Valores estão desfocados." loading="lazy" decoding="async"></div></div><figcaption>Captura com dados ocultados.</figcaption></figure>
+        <figure class="case-fig rv"><div class="frame "><div class="fbar" aria-hidden="true"><i></i><i></i><i></i></div><img src="img/bi-capa.webp" width="1600" height="580" alt="Capa do painel em Power BI, Posição financeira, em tema escuro, com cartões de resumo e atalhos para as páginas Alavancagem, Aplicações Fechado e Aplicações Hoje. Valores e logotipo estão desfocados." loading="lazy" decoding="async"></div><figcaption>Captura real, com dados desfocados.</figcaption></figure>
         <!-- ALTERNATIVA (ilustração de fluxo, sem dados): <svg class="flow flow-h" viewBox="0 0 520 250" role="img" aria-label="Fluxo: fontes de dados, atualização automática, painéis para gerência e diretoria" xmlns="http://www.w3.org/2000/svg"><text x="0" y="34" class="flow-cap">Entrada</text><rect x="0" y="56" width="152" height="138" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="76.0" y="119.0" text-anchor="middle" class="flow-t1" fill="var(--ink)">Fontes de</text><text x="76.0" y="141.0" text-anchor="middle" class="flow-t" fill="var(--ink)">dados</text><path d="M158 125.0 h20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M172 119.0 l7 6 l-7 6" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="184" y="34" class="flow-cap">Processo</text><rect x="184" y="56" width="152" height="138" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/><text x="260.0" y="119.0" text-anchor="middle" class="flow-t1" fill="#ffffff">Atualização</text><text x="260.0" y="141.0" text-anchor="middle" class="flow-t" fill="#ffffff">automática</text><path d="M342 125.0 h20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M356 119.0 l7 6 l-7 6" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="368" y="34" class="flow-cap">Saída</text><rect x="368" y="56" width="152" height="138" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="444.0" y="108.0" text-anchor="middle" class="flow-t1" fill="var(--ink)">Painéis para</text><text x="444.0" y="130.0" text-anchor="middle" class="flow-t" fill="var(--ink)">gerência e</text><text x="444.0" y="152.0" text-anchor="middle" class="flow-t" fill="var(--ink)">diretoria</text><line x1="0" y1="226" x2="520" y2="226" stroke="var(--line)" stroke-width="1"/><text x="0" y="243" class="flow-note">Fluxo ilustrativo, sem dados nem telas reais.</text></svg><svg class="flow flow-v" viewBox="0 0 320 418" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="320" height="104" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="16" y="24" class="flow-cap" fill="var(--muted)" style="fill:var(--muted)">Entrada</text><text x="16" y="60" class="flow-t1" fill="var(--ink)">Fontes de</text><text x="16" y="80" class="flow-t" fill="var(--ink)">dados</text><path d="M160.0 110 v20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M154.0 124 l6 7 l6 -7" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="0" y="138" width="320" height="104" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/><text x="16" y="162" class="flow-cap" fill="#E6DFF8" style="fill:#E6DFF8">Processo</text><text x="16" y="198" class="flow-t1" fill="#ffffff">Atualização</text><text x="16" y="218" class="flow-t" fill="#ffffff">automática</text><path d="M160.0 248 v20" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M154.0 262 l6 7 l6 -7" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="0" y="276" width="320" height="104" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="16" y="300" class="flow-cap" fill="var(--muted)" style="fill:var(--muted)">Saída</text><text x="16" y="328" class="flow-t1" fill="var(--ink)">Painéis para</text><text x="16" y="348" class="flow-t" fill="var(--ink)">gerência e</text><text x="16" y="368" class="flow-t" fill="var(--ink)">diretoria</text><text x="0" y="412" class="flow-note">Fluxo ilustrativo, sem dados nem telas reais.</text></svg> -->
         <div class="case-body rv">
           <p class="case-meta"><span class="num">Caso 05</span><span class="status"><i class="dot on" aria-hidden="true"></i>Em uso</span></p>
@@ -466,7 +564,7 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
             <div><dt>O problema</dt><dd>Gerência e diretoria dependiam de planilhas refeitas a cada consulta.</dd></div>
             <div><dt>O que construí</dt><dd>Painéis de uso exclusivo, com alavancagem, aplicações e indicadores, validados pela gerência e pela diretoria.</dd></div>
             <div><dt>Resultado</dt><dd>Informação atualizada automaticamente.</dd></div>
-            <div><dt>Ferramentas</dt><dd><ul class="tools"><li>Power BI</li><li>Power Query</li></ul></dd></div>
+            <div><dt>Ferramentas</dt><dd><ul class="tools"><li>Power BI</li><li>Power Query</li><li>SQL</li><li>Excel avançado</li><li>IA</li><li>Figma</li></ul></dd></div>
           </dl>
         </div>
       </article>
@@ -481,31 +579,35 @@ footer{padding:56px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
       </div>
       <ol class="timeline">
         <li class="rv"><span class="n">01</span><h3>Entender o processo</h3><p>Começo pela tarefa manual: quem faz, quanto tempo leva e onde o erro aparece.</p></li>
-        <li class="rv"><span class="n">02</span><h3>Rascunho com IA</h3><p>Peço o primeiro protótipo ao Claude Code e valido se resolve o problema.</p></li>
+        <li class="rv"><span class="n">02</span><h3>Rascunho com IA</h3><p>Uso ferramentas de IA para montar o primeiro protótipo e valido se resolve o problema.</p></li>
         <li class="rv"><span class="n">03</span><h3>Testar e ajustar</h3><p>Rodo com casos reais, corrijo e simplifico até ficar confiável.</p></li>
         <li class="rv"><span class="n">04</span><h3>Entregar e evoluir</h3><p>Coloco no ar, junto com quem usa, e melhoro com o retorno.</p></li>
       </ol>
       <!-- RASCUNHO: citação ainda não aprovada pelo Caio. -->
-      <blockquote class="pull rv">Eu descrevo o processo e as regras de negócio. O Claude Code escreve o código. Eu valido com casos reais antes de colocar em uso.</blockquote>
+      <blockquote class="pull rv">Eu descrevo o processo e as regras de negócio. A IA escreve o código. Eu valido com casos reais antes de colocar em uso.</blockquote>
       <div class="tools-line rv">
         <h3>Ferramentas</h3>
-        <ul class="tools"><li>Claude Code</li><li>Power BI</li><li>Excel avançado</li><li>Power Query</li><li>VBA</li><li>Python e SQL (com apoio de IA)</li><li>GitHub</li><li>Next.js</li><li>Vercel</li></ul>
+        <ul class="tools"><li>Ferramentas de IA</li><li>Power BI</li><li>Excel avançado</li><li>Power Query</li><li>VBA</li><li>Python</li><li>SQL</li><li>Figma</li><li>GitHub</li><li>Next.js</li><li>React</li><li>TypeScript</li><li>Vercel</li></ul>
       </div>
     </div>
   </section>
 
   <section class="contact" id="contato" style="padding-top:0" aria-labelledby="contato-t">
     <div class="wrap">
-      <div class="box rv">
-        <div>
-          <span class="eyebrow">Contato</span>
-          <h2 id="contato-t">Vamos conversar?</h2>
+      <div class="box rv"><div class="box-in">
+        <div class="who">
+          <img class="me" src="img/caio.webp" width="104" height="104" alt="Foto de Caio Edgar Barbosa Ramos" loading="lazy" decoding="async">
+          <div>
+            <span class="eyebrow">Contato</span>
+            <h2 id="contato-t">Vamos conversar?</h2>
+            <p class="who-sub">Caio Edgar Barbosa Ramos · Rio Negro/PR</p>
+          </div>
         </div>
         <div class="btn-row">
           <a class="btn pri" href="https://www.linkedin.com/in/caioebramos/" target="_blank" rel="noopener">LinkedIn <svg class="arr" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="btn" href="mailto:caioedgaramos11@gmail.com">E-mail <svg class="arr" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
-      </div>
+      </div></div>
     </div>
   </section>
 </main>
